@@ -186,8 +186,8 @@
                 <div class="col-12 col-sm-12 col-lg-12"
                         style="box-shadow: 0 5px 30px rgba(41,41,59,.1);padding: 10px;">
                     <div class="contact-form-area wow fadeInUp" data-wow-delay="500ms" style="margin: 15px;">
-                        <form action="#" method="post">
-                            <input type="text" class="form-control" id="name" placeholder="Student Name">
+                        <form>
+                            <input type="text" class="form-control" id="Name" name="Name" placeholder="Student Name">
                             <!-- <select class="form-control">
                                 <option value="" selected>Select Course</option>
                                 <option value="diploma" > Diploma</option>
@@ -195,29 +195,36 @@
                                 <option value="bsc" > BSc</option>
                             </select> -->
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadioInline1">Diploma</label>
+                                <input type="radio" id="Course1" name="Course" class="custom-control-input">
+                                <label class="custom-control-label" for="Course1">Diploma</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadioInline2">Engineering</label>
+                                <input type="radio" id="Course2" name="Course" class="custom-control-input">
+                                <label class="custom-control-label" for="Course2">Engineering</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                                <label class="custom-control-label" for="customRadioInline2">BSc</label>
+                                <input type="radio" id="Course3" name="Course" class="custom-control-input">
+                                <label class="custom-control-label" for="Course3">BSc</label>
                             </div>
-                            <select class="form-control">
+                            <select class="form-control" id="Branch" name="Branch">
                                 <option value="" selected>Select Branch</option>
-                                <option value="diploma"> Diploma</option>
-                                <option value="engineering"> Engineering</option>
-                                <option value="bsc"> BSc</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Civil">Civil</option>
+                                <option value="Production">Production</option>
+                                <option value="Mechanical">Mechanical</option>
+                                <option value="EXTC">EXTC</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="Construction Technology">Construction Technology</option>
+                                <option value="Industrial">Industrial</option>
+                                <option value="Automobile ">Automobile</option>
                             </select>
-                            <input type="text" class="form-control" id="collegename" placeholder="College Name">
-                            <textarea name="address" class="form-control" id="address" cols="30" rows="3" placeholder="Address (Res.)"></textarea>
-                            <input type="text" class="form-control" id="contactno" placeholder="Contact No">
-                            <input type="email" class="form-control" id="email" placeholder="E-mail">
-                            <input type="text" class="form-control" id="contactno" placeholder="Which Coaching Classes Currently Studying In">
-                            <button class="btn academy-btn btn-sm mt-30" type="submit">Submit</button>
+                            <input name="CollegeName" type="text" class="form-control" id="CollegeName" placeholder="College Name">
+                            <textarea name="Address" class="form-control" id="Address" cols="30" rows="3" placeholder="Address (Res.)"></textarea>
+                            <input name="ContactNo" type="text" class="form-control" id="ContactNo" placeholder="Contact No">
+                            <input name="EmailID" type="email" class="form-control" id="EmailID" placeholder="E-mail">
+                            <input name="PrevClass" type="text" class="form-control" id="PrevClass" placeholder="Which Coaching Classes Currently Studying In">
+                            <button class="btn academy-btn btn-sm mt-30" type="button" onclick="submitform()">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -377,6 +384,44 @@
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+    <script>
+        function submitform() {
+            // send ajax
+            var Name = $("#Name").val();
+            var Course = $("input[name='Course']:checked").val();
+            var Branch = $("#Branch").val();
+            var CollegeName = $("#CollegeName").val();
+            var Address = $("#Address").val();
+            var EmailID = $("#EmailID").val();
+            var ContactNo = $("#ContactNo").val();
+            var PrevClass = $("#PrevClass").val();
+            var jsonObjects = { Name: Name, Course: Course, Branch: Branch, CollegeName: CollegeName, Address: Address, EmailID: EmailID, ContactNo: ContactNo, PrevClass: PrevClass };
+            var newdata = { enquiry: JSON.stringify(jsonObjects) }
+            $.ajax({
+                url: 'http://localhost:5000/enquiry',
+                type: "POST",
+                data: newdata,
+                dataType: "json",
+                beforeSend: function (x) {
+                    if (x && x.overrideMimeType) {
+                        x.overrideMimeType("application/j-son;charset=UTF-8");
+                    }
+                },
+                success: function (result) {
+                    alert(result.message)
+                    if (result.status) {
+                        document.getElementById("Name").value = ""
+                        document.getElementById("Branch").value = ""
+                        document.getElementById("CollegeName").value = ""
+                        document.getElementById("Address").value = ""
+                        document.getElementById("EmailID").value = ""
+                        document.getElementById("ContactNo").value = ""
+                        document.getElementById("PrevClass").value = ""
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

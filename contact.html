@@ -218,7 +218,7 @@
                                         <div class="contact-icon mr-15">
                                             <i class="icon-placeholder"></i>
                                         </div>
-                                        <p>Shop No.412, Raut Arcade, opp. Rly.Subway, Pimpal Wadi, Virar East, Virar, Maharashtra 401305</p>
+                                        <p>Shop No.412/413, Raut Arcade, opp. Rly.Subway, Pimpal Wadi, Virar East, Virar, Maharashtra 401305</p>
                                     </div>
 
                                     <!-- Single Contact Info -->
@@ -226,7 +226,7 @@
                                         <div class="contact-icon mr-15">
                                             <i class="icon-telephone-1"></i>
                                         </div>
-                                        <p>Main: 077568 22027 <br> Office: 077568 22027</p>
+                                        <p>Main: 70 3839 2666 <br> Office: 75 0694 4034</p>
                                     </div>
 
                                     <!-- Single Contact Info -->
@@ -241,11 +241,11 @@
                             <!-- Contact Form Area -->
                             <div class="col-12 col-lg-7">
                                 <div class="contact-form-area wow fadeInUp" data-wow-delay="500ms">
-                                    <form action="#" method="post">
-                                        <input type="text" class="form-control" id="name" placeholder="Name">
-                                        <input type="email" class="form-control" id="email" placeholder="E-mail">
-                                        <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Message"></textarea>
-                                        <button class="btn academy-btn mt-30" type="submit">Contact Us</button>
+                                    <form id="form">
+                                        <input name="Name" type="text" class="form-control" id="Name" placeholder="Name">
+                                        <input name="EmailID" type="email" class="form-control" id="EmailID" placeholder="E-mail">
+                                        <textarea name="Message" class="form-control" id="Message" cols="30" rows="10" placeholder="Message"></textarea>
+                                        <button class="btn academy-btn mt-30" type="button" onclick="submitform()">Contact Us</button>
                                     </form>
                                 </div>
                             </div>
@@ -412,6 +412,35 @@
     <!-- Google Maps -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR7PkSFEl-ITU7Gg1LYrcBt4bf1hYiq6M"></script>
     <script src="js/google-map/map-active.js"></script>
+    <script>
+        function submitform () {
+            // send ajax
+            var Name = $("#Name").val();
+            var EmailID = $("#EmailID").val();
+            var Message = $("#Message").val();
+            var jsonObjects = { Name: Name, EmailID: EmailID, Message: Message };
+            var newdata = { contactus: JSON.stringify(jsonObjects) }
+            $.ajax({
+                url: 'http://localhost:5000/contactus',
+                type: "POST",
+                data: newdata,
+                dataType: "json",
+                beforeSend: function (x) {
+                    if (x && x.overrideMimeType) {
+                        x.overrideMimeType("application/j-son;charset=UTF-8");
+                    }
+                },
+                success: function (result) {
+                    alert(result.message)
+                    if (result.status) {
+                        document.getElementById("Name").value = ""
+                        document.getElementById("EmailID").value = ""
+                        document.getElementById("Message").value = ""
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

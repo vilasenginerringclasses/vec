@@ -189,17 +189,17 @@
                     </div>
                     <div class="col-sm-12 col-lg-7">
                         <div class="contact-form-area wow fadeInUp" data-wow-delay="500ms" style="margin: 15px;">
-                            <form action="#" method="post">
-                                <input type="text" class="form-control" id="name" placeholder="Name">
-                                <input type="text" class="form-control" id="contactno" placeholder="Contact No">
-                                <input type="email" class="form-control" id="email" placeholder="E-mail">
-                                <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                <textarea name="description" class="form-control" id="description" cols="30" rows="3" placeholder="Description"></textarea>
+                            <form>
+                                <input type="text" class="form-control" id="Name" name="Name" placeholder="Name">
+                                <input type="text" class="form-control" id="ContactNo" name="ContactNo" placeholder="Contact No">
+                                <input type="email" class="form-control" id="EmailID" name="EmailID" placeholder="E-mail">
+                                <input type="text" class="form-control" id="Subject" name="Subject" placeholder="Subject">
+                                <textarea name="description" class="form-control" id="Description" name="Description" cols="30" rows="3" placeholder="Description"></textarea>
                                 <div class="custom-file mb-3">
                                     <input type="file" class="custom-file-input" id="customFile" name="filename">
                                     <label class="custom-file-label" for="customFile">Upload Resume</label>
                                 </div>
-                                <button class="btn academy-btn btn-sm mt-30" type="submit">Submit</button>
+                                <button class="btn academy-btn btn-sm mt-30" type="button" onclick="submitform()">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -359,6 +359,39 @@
         <script src="js/plugins/plugins.js"></script>
         <!-- Active js -->
         <script src="js/active.js"></script>
+        <script>
+            function submitform() {
+                // send ajax
+                var Name = $("#Name").val();
+                var ContactNo = $("#ContactNo").val();
+                var EmailID = $("#EmailID").val();
+                var Subject = $("#Subject").val();
+                var Description = $("#Description").val();
+                var jsonObjects = { Name: Name, ContactNo: ContactNo, EmailID: EmailID, Subject: Subject, Description: Description };
+                var newdata = { career: JSON.stringify(jsonObjects) }
+                $.ajax({
+                    url: 'http://localhost:5000/career',
+                    type: "POST",
+                    data: newdata,
+                    dataType: "json",
+                    beforeSend: function (x) {
+                        if (x && x.overrideMimeType) {
+                            x.overrideMimeType("application/j-son;charset=UTF-8");
+                        }
+                    },
+                    success: function (result) {
+                        alert(result.message)
+                        if (result.status) {
+                            document.getElementById("Name").value = ""
+                            document.getElementById("EmailID").value = ""
+                            document.getElementById("ContactNo").value = ""
+                            document.getElementById("Subject").value = ""
+                            document.getElementById("Description").value = ""
+                        }
+                    }
+                });
+            }
+        </script>
     </body>
 
 </html>
