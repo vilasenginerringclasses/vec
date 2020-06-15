@@ -398,7 +398,7 @@
             var jsonObjects = { Name: Name, Course: Course, Branch: Branch, CollegeName: CollegeName, Address: Address, EmailID: EmailID, ContactNo: ContactNo, PrevClass: PrevClass };
             var newdata = { enquiry: JSON.stringify(jsonObjects) }
             $.ajax({
-                url: 'http://localhost:5000/enquiry',
+                url: 'http://52.15.124.123:5000/enquiry',
                 type: "POST",
                 data: newdata,
                 dataType: "json",
@@ -418,6 +418,9 @@
                         document.getElementById("ContactNo").value = ""
                         document.getElementById("PrevClass").value = ""
                     }
+                },
+                error: function (jqXHR, exception) {
+                    alert('Something went to wrong')
                 }
             });
         }

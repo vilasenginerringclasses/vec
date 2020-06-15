@@ -370,7 +370,7 @@
                 var jsonObjects = { Name: Name, ContactNo: ContactNo, EmailID: EmailID, Subject: Subject, Description: Description };
                 var newdata = { career: JSON.stringify(jsonObjects) }
                 $.ajax({
-                    url: 'http://localhost:5000/career',
+                    url: 'http://52.15.124.123:5000//career',
                     type: "POST",
                     data: newdata,
                     dataType: "json",
@@ -388,6 +388,9 @@
                             document.getElementById("Subject").value = ""
                             document.getElementById("Description").value = ""
                         }
+                    },
+                    error: function (jqXHR, exception) {
+                        alert('Something went to wrong')
                     }
                 });
             }

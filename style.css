@@ -546,7 +546,7 @@ img {
   margin-bottom: -60px; }
   @media only screen and (max-width: 767px) {
     .top-features-area {
-      margin-bottom: -115px; } }
+      margin-bottom: -240px; } }
   .top-features-area .features-content {
     border-radius: 10%;
     position: relative;
@@ -1513,6 +1513,12 @@ img {
   }
   .footerlogobottom {
     padding-bottom: 27px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobilespace {
+    margin-bottom: 40px!important;
   }
 }
 

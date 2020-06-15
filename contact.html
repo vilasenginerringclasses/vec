@@ -421,7 +421,7 @@
             var jsonObjects = { Name: Name, EmailID: EmailID, Message: Message };
             var newdata = { contactus: JSON.stringify(jsonObjects) }
             $.ajax({
-                url: 'http://localhost:5000/contactus',
+                url: 'http://52.15.124.123:5000//contactus',
                 type: "POST",
                 data: newdata,
                 dataType: "json",
@@ -437,6 +437,9 @@
                         document.getElementById("EmailID").value = ""
                         document.getElementById("Message").value = ""
                     }
+                },
+                error: function (jqXHR, exception) {
+                    alert('Something went to wrong')
                 }
             });
         }
