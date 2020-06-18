@@ -554,7 +554,7 @@ img {
     background: #ffc107;
     background: -webkit-linear-gradient(to right, #ffc107, #f3d16a);;
     background: linear-gradient(to right, #ffc107, #f3d16a);;
-    padding: 40px 15px;
+    padding: 20px 15px;
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%); }
     .top-features-area .features-content .single-top-features {
@@ -1520,6 +1520,11 @@ img {
   .mobilespace {
     margin-bottom: 40px!important;
   }
+}
+
+.section-padding-50-50 {
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 

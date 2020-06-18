@@ -16,6 +16,7 @@
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="style.css">
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css" />
 
 </head>
 
@@ -410,8 +411,57 @@
     <!-- Active js -->
     <script src="js/active.js"></script>
     <!-- Google Maps -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR7PkSFEl-ITU7Gg1LYrcBt4bf1hYiq6M"></script>
-    <script src="js/google-map/map-active.js"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR7PkSFEl-ITU7Gg1LYrcBt4bf1hYiq6M"></script>
+    <script src="js/google-map/map-active.js"></script> -->
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+    <!-- <script type="text/javascript">
+        window.onload = function () {
+            L.mapquest.key = 'lYrP4vF3Uk5zgTiGGuEzQGwGIVDGuy24';
+
+            L.mapquest.geocoding().geocode('Vilas Engineering Classes, Virar', createMap);
+
+            function createMap(error, response) {
+                var location = response.results[0].locations[0];
+                var latLng = location.displayLatLng;
+                var map = L.mapquest.map('googleMap', {
+                    center: [19.4529532, 72.8132116],
+                    layers: L.mapquest.tileLayer('map'),
+                    zoom: 15
+                });
+
+                var customIcon = L.mapquest.icons.circle({
+                    primaryColor: '#3b5998'
+                });
+
+                L.marker([19.4529532, 72.8132116], { icon: customIcon }).addTo(map);
+            }
+        }
+    </script> -->
+    <script type="text/javascript">
+        window.onload = function () {
+            L.mapquest.key = 'lYrP4vF3Uk5zgTiGGuEzQGwGIVDGuy24';
+
+            L.mapquest.geocoding().geocode('Vilas Engineering Classes, virar', createMap);
+
+            function createMap(error, response) {
+                var map = L.mapquest.map('googleMap', {
+                    center: [19.4529532, 72.8132116],
+                    layers: L.mapquest.tileLayer('map'),
+                    zoom: 15
+                });
+
+                var customPopup = L.popup({ closeButton: false })
+                    .setLatLng([19.4529532, 72.8132116])
+                    .setContent('<strong> Vilas Engineering Classes , virar  </strong> is located here.')
+                    .openOn(map);
+                var customIcon = L.mapquest.icons.circle({
+                    primaryColor: '#3b5998'
+                });
+
+                L.marker([19.4529532, 72.8132116], { icon: L.mapquest.icons.marker() }).addTo(map);
+            }
+        }
+    </script>
     <script>
         function submitform () {
             // send ajax
