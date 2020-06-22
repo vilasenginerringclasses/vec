@@ -1,0 +1,16 @@
+User-Agent: Googlebot
+Disallow: /local/
+Disallow: /assets/
+
+User-agent: Slurp
+Disallow: /local/
+Disallow: /assets/
+
+User-agent: bingbot
+Disallow: /local/
+Disallow: /assets/
+
+User-agent: *
+Disallow:
+
+sitemap: http://vilasengineeringclasses.in/sitemap.xml
